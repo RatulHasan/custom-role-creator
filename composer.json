@@ -1,0 +1,21 @@
+{
+    "name": "ratul/custom-role-creator",
+    "description": "Custom Role Creator plugin allows you to add or change user roles and capabilities easily.",
+    "type": "wordpress-plugin",
+    "keywords": ["role", "custom role"],
+    "homepage": "https://github.com/RatulHasan/custom-role-creator",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Ratul Hasan",
+            "email": "tanjilhasanratul@gmail.com",
+            "homepage": "https://github.com/RatulHasan/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CRC\\": "includes/"
+        },
+      "files": []
+    }
+}
