@@ -4,7 +4,7 @@
         '.crc_role_edit_button',
         function (e) {
 			var role_name = $( this ).data( 'edit_crc_role_name' );
-			$( "#edit_role_name" ).val( role_name );
+			$( "#edit_crc_role_name" ).val( role_name );
 		}
     );
 
