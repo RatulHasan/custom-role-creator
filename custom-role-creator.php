@@ -17,6 +17,8 @@
  */
 
 // To prevent direct access, if not define WordPress ABSOLUTE PATH then exit.
+use CRC\Init;
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit();
 }
@@ -81,12 +83,7 @@ class CRC {
      * @return void
      */
     public function initiate_plugin() {
-//        global $wp_roles;
-//        $all_roles = new \WP_Roles();
-//        echo '<pre>';
-//        print_r( $all_roles );
-//        exit();
-
+        Init::register();
     }
     /**
      * Init method for CRC
