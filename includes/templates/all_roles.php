@@ -29,6 +29,11 @@ if ( isset( $_GET['saved'] ) ) {
     <p><strong>' . esc_html__( 'Warning! Name of a role can\'t be empty.', 'custom-role-creator' ) . '</strong></p>
   </div>';
     }
+    if ( 3 == $_GET['deleted'] ) {
+        echo '<div id="crc_settings_message" class="alert-success">
+    <p><strong>' . esc_html__( 'Success! Data have been deleted.', 'custom-role-creator' ) . '</strong></p>
+  </div>';
+    }
 }
 ?>
 <div class="wrap">
@@ -40,7 +45,7 @@ if ( isset( $_GET['saved'] ) ) {
         <table class="table table-responsive table-bordered wp-list-table widefat fixed striped table-view-list posts">
             <thead>
             <tr>
-                <th><?php esc_html_e( 'SL', 'custom-role-creator' ); ?></th>
+                <th width="10%"><?php esc_html_e( 'SL', 'custom-role-creator' ); ?></th>
                 <th><?php esc_html_e( 'Role Name', 'custom-role-creator' ); ?></th>
                 <th><?php esc_html_e( 'Assigned Capabilities', 'custom-role-creator' ); ?></th>
                 <th><?php esc_html_e( 'Action', 'custom-role-creator' ); ?></th>
@@ -48,8 +53,9 @@ if ( isset( $_GET['saved'] ) ) {
             </thead>
             <tbody>
             <?php
-            $i     = 1;
-            $nonce = wp_create_nonce( 'crc_assign_role_nonce' );
+            $i            = 1;
+            $nonce        = wp_create_nonce( 'crc_assign_role_nonce' );
+            $delete_nonce = wp_create_nonce( 'crc_delete_role_nonce' );
             foreach ( $all_role_names as $key => $v_all_role ) {
                 $all_capability = $all_roles_obj->get_role( $key );
 
@@ -60,18 +66,21 @@ if ( isset( $_GET['saved'] ) ) {
                 ?>
                 <tr>
                     <td><?php echo esc_html( $i ); ?></td>
-                    <td><?php echo esc_html( $v_all_role . ' (' . $key . ')' ); ?></td>
+                    <td><?php echo esc_html( $v_all_role ); ?></td>
                     <td class="text-right"><?php echo esc_html( $count ); ?></td>
                     <td class="text-right">
                         <?php
                         if ( 'administrator' !== $key ) {
                             ?>
                             <a href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=assign&_wpnonce=<?php echo esc_attr( $nonce ); ?>" class="btn btn-success btn-flat btn-xs edit_button">
-                                <i class="fas fa-cogs"></i> Assign capabilities
+                                <i class="fas fa-cogs"></i> <?php esc_html_e( 'Assign capabilities', 'custom-role-creator' ); ?>
                             </a>
                             <button type="button" class="btn btn-primary btn-flat btn-xs crc_role_edit_button" data-toggle="modal" data-target="#myRoleEdit" data-edit_crc_role_display_name="<?php echo esc_attr( $v_all_role ); ?>" data-edit_crc_role_name="<?php echo esc_attr( $key ); ?>">
-                                <i class="fas fa-pencil-alt"></i> Edit role
+                                <i class="fas fa-pencil-alt"></i> <?php esc_html_e( 'Edit role', 'custom-role-creator' ); ?>
                             </button>
+                            <a onclick="return confirm('<?php esc_html_e( 'Confirm to delete?', 'custom-role-creator' ); ?>')" href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=delete&_wpnonce=<?php echo esc_attr( $delete_nonce ); ?>" class="btn btn-danger btn-flat btn-xs delete_button">
+                                <i class="fas fa-trash-alt"></i> <?php esc_html_e( 'Delete role', 'custom-role-creator' ); ?>
+                            </a>
                             <?php
                         }
                         ?>

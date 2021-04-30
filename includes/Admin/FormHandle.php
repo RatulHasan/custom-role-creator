@@ -22,6 +22,10 @@ class FormHandle {
      * FormHandle constructor.
      */
     public function __construct() {
+        if ( isset( $_GET['action'] ) && 'delete' === $_GET['action'] ) {
+            $this->cb_crc_role_delete();
+        }
+
         if ( ! isset( $_POST ) ) {
             return;
         }
@@ -35,6 +39,21 @@ class FormHandle {
         if ( isset( $_POST['crc_cap_submit'] ) ) {
             $this->cb_crc_cap_submit();
         }
+    }
+
+    /**
+     * Callback for crc role delete.
+     *
+     * @return void
+     */
+    public function cb_crc_role_delete() {
+        if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'crc_delete_role_nonce' ) ) {
+            wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+        }
+        $role = $_GET['role'];
+        remove_role( $role );
+        wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&deleted=3' );
+        exit();
     }
 
     /**
