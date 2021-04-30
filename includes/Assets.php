@@ -46,10 +46,10 @@ class Assets {
         if ( 'users_page_custom-role-creator' === $screen ) {
             wp_enqueue_style( 'bootstrap' );
             wp_enqueue_style( 'AdminLTE' );
-            wp_enqueue_style( 'crc_custom' );
+            wp_enqueue_style( 'crc_custom_css' );
             wp_enqueue_style( 'my-font-awesome-css' );
             wp_enqueue_script( 'bootstrap-scripts' );
-            wp_enqueue_script( 'custom-js' );
+            wp_enqueue_script( 'crc_custom_js' );
 
             if ( isset( $_GET['role'] ) && 'assign' === $_GET['action'] ) {
                 wp_dequeue_style( 'bootstrap' );
@@ -68,22 +68,22 @@ class Assets {
             'AdminLTE'            => array(
                 'src'  => CRC_ASSETS . '/css/AdminLTE.min.css',
                 'deps' => array( 'bootstrap' ),
-                'ver'  => filemtime( CRC_BASE_PATH . '/assets/css/AdminLTE.min.css' ),
+                'ver'  => CRC_VERSION,
             ),
-            'crc_custom'          => array(
-                'src'  => CRC_ASSETS . '/css/custom.css',
+            'crc_custom_css'      => array(
+                'src'  => CRC_ASSETS . '/css/custom.min.css',
                 'deps' => array(),
-                'ver'  => filemtime( CRC_BASE_PATH . '/assets/css/custom.css' ),
+                'ver'  => CRC_VERSION,
             ),
             'bootstrap'           => array(
                 'src'  => CRC_ASSETS . '/css/bootstrap/dist/css/bootstrap.min.css',
                 'deps' => array(),
-                'ver'  => filemtime( CRC_BASE_PATH . '/assets/css/bootstrap/dist/css/bootstrap.min.css' ),
+                'ver'  => CRC_VERSION,
             ),
             'my-font-awesome-css' => array(
                 'src'  => MY_GITHUB_ASSETS . '/fontawesome-free-5.15.3/css/all.min.css',
                 'deps' => array(),
-                'ver'  => filemtime( MY_GITHUB_BASE_PATH . '/assets/fontawesome-free-5.15.3/css/all.min.css' ),
+                'ver'  => CRC_VERSION,
             ),
         );
     }
@@ -96,15 +96,15 @@ class Assets {
      */
     public function get_admin_scripts() {
         return array(
-            'custom-js'         => array(
-                'src'  => CRC_ASSETS . '/js/custom.js',
+            'crc_custom_js'     => array(
+                'src'  => CRC_ASSETS . '/js/custom.min.js',
                 'deps' => array( 'jquery' ),
-                'ver'  => filemtime( CRC_BASE_PATH . '/assets/js/custom.js' ),
+                'ver'  => CRC_VERSION,
             ),
             'bootstrap-scripts' => array(
                 'src'  => CRC_ASSETS . '/css/bootstrap/dist/js/bootstrap.min.js',
                 'deps' => array( 'jquery' ),
-                'ver'  => filemtime( CRC_BASE_PATH . '/assets/css/bootstrap/dist/js/bootstrap.min.js' ),
+                'ver'  => CRC_VERSION,
             ),
         );
     }
