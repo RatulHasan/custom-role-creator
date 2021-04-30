@@ -28,9 +28,11 @@ class Init {
      */
     public static function register() {
         if ( is_admin() ) {
-            new FormHandle();
-            new Assets();
-            new Menu();
+            if ( current_user_can( 'manage_options' ) ) {
+                new FormHandle();
+                new Assets();
+                new Menu();
+            }
         }
     }
 }

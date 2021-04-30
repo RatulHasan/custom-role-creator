@@ -46,10 +46,15 @@ class Assets {
         if ( 'users_page_custom-role-creator' === $screen ) {
             wp_enqueue_style( 'bootstrap' );
             wp_enqueue_style( 'AdminLTE' );
-            wp_enqueue_style( 'custom' );
+            wp_enqueue_style( 'crc_custom' );
             wp_enqueue_style( 'my-font-awesome-css' );
             wp_enqueue_script( 'bootstrap-scripts' );
             wp_enqueue_script( 'custom-js' );
+
+            if ( isset( $_GET['role'] ) && 'assign' === $_GET['action'] ) {
+                wp_dequeue_style( 'bootstrap' );
+                wp_dequeue_style( 'AdminLTE' );
+            }
         }
     }
 
@@ -65,7 +70,7 @@ class Assets {
                 'deps' => array( 'bootstrap' ),
                 'ver'  => filemtime( CRC_BASE_PATH . '/assets/css/AdminLTE.min.css' ),
             ),
-            'custom'              => array(
+            'crc_custom'          => array(
                 'src'  => CRC_ASSETS . '/css/custom.css',
                 'deps' => array(),
                 'ver'  => filemtime( CRC_BASE_PATH . '/assets/css/custom.css' ),

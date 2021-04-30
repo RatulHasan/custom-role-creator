@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit();
 }
 if ( isset( $_GET['saved'] ) ) {
-    if ( 1 == $_GET[ 'saved' ]  ) {
+    if ( 1 == $_GET['saved'] ) {
         echo '<div id="crc_settings_message" class="alert-success">
     <p><strong>' . esc_html__( 'Success! Data have been saved.', 'custom-role-creator' ) . '</strong></p>
   </div>';
     }
-    if ( 0 == $_GET[ 'saved' ]  ) {
+    if ( 0 == $_GET['saved'] ) {
         echo '<div id="crc_settings_message" class="alert-warning">
     <p><strong>' . esc_html__( 'Warning! Data not saved.', 'custom-role-creator' ) . '</strong></p>
   </div>';
@@ -37,25 +37,34 @@ if ( isset( $_GET['saved'] ) ) {
             <tr>
                 <th><?php esc_html_e( 'SL', 'custom-role-creator' ); ?></th>
                 <th><?php esc_html_e( 'Role Name', 'custom-role-creator' ); ?></th>
+                <th><?php esc_html_e( 'Assigned Capabilities', 'custom-role-creator' ); ?></th>
                 <th><?php esc_html_e( 'Action', 'custom-role-creator' ); ?></th>
             </tr>
             </thead>
             <tbody>
             <?php
-            $i = 1;
-            foreach ( $all_roles->role_names as $key => $v_all_role ) {
+            $i     = 1;
+            $nonce = wp_create_nonce( 'crc_assign_role_nonce' );
+            foreach ( $all_role_names as $key => $v_all_role ) {
+                $all_capability = $all_roles_obj->get_role( $key );
+
+                $count = 0;
+                if ( ! empty( $all_capability->capabilities ) ) {
+                    $count = count( $all_capability->capabilities );
+                }
                 ?>
                 <tr>
                     <td><?php echo esc_html( $i ); ?></td>
                     <td><?php echo esc_html( $v_all_role . ' (' . $key . ')' ); ?></td>
-                    <td>
+                    <td class="text-right"><?php echo esc_html( $count ); ?></td>
+                    <td class="text-right">
                         <?php
                         if ( 'administrator' !== $key ) {
                             ?>
-                            <a href="" class="btn btn-success btn-flat btn-xs edit_button">
-                                <i class="fas fa-cogs"></i> Assign menu
+                            <a href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=assign&_wpnonce=<?php echo esc_attr( $nonce ); ?>" class="btn btn-success btn-flat btn-xs edit_button">
+                                <i class="fas fa-cogs"></i> Assign capabilities
                             </a>
-                            <button type="button" class="btn btn-primary btn-flat btn-xs crc_role_edit_button" data-toggle="modal" data-target="#myRoleEdit" data-edit_crc_role_name="<?php echo esc_attr( $v_all_role ); ?>">
+                            <button type="button" class="btn btn-primary btn-flat btn-xs crc_role_edit_button" data-toggle="modal" data-target="#myRoleEdit" data-edit_crc_role_display_name="<?php echo esc_attr( $v_all_role ); ?>" data-edit_crc_role_name="<?php echo esc_attr( $key ); ?>">
                                 <i class="fas fa-pencil-alt"></i> Edit role
                             </button>
                             <?php
@@ -126,16 +135,7 @@ if ( isset( $_GET['saved'] ) ) {
                                     <input type="hidden" name="role_id" required id="edit_role_id">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input type="text" name="crc_role_name" required id="edit_crc_role_name" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit_role_status"><?php esc_html_e( 'Role Status', 'custom-role-creator' ); ?></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="role_status" id="edit_role_status" class="form-control widefat">
-                                            <option value="" hidden><?php esc_html_e( 'Choose one', 'custom-role-creator' ); ?></option>
-                                            <option value="1"><?php esc_html_e( 'Active', 'custom-role-creator' ); ?></option>
-                                            <option value="0"><?php esc_html_e( 'Inactive', 'custom-role-creator' ); ?></option>
-                                        </select>
+                                        <input type="hidden" name="crc_pre_role_name" required id="edit_crc_pre_role_name" class="form-control col-md-7 col-xs-12">
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>
@@ -145,6 +145,7 @@ if ( isset( $_GET['saved'] ) ) {
                                             <i class="fas fa-pencil-alt"></i> <?php esc_html_e( 'Update', 'custom-role-creator' ); ?></button>
                                     </div>
                                 </div>
+                                <?php wp_nonce_field( 'crc_update_role', 'crc_update_role_fields' ); ?>
                             </form>
                         </div>
                     </div>

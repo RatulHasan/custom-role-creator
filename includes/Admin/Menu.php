@@ -39,7 +39,8 @@ class Menu {
             __( 'Custom Role Creator', 'custom-role-creator' ),
             'manage_options',
             'custom-role-creator',
-            array( $this, 'cb_add_custom_role_creator_page' )
+            array( $this, 'cb_add_custom_role_creator_page' ),
+            3
         );
     }
 
@@ -49,9 +50,40 @@ class Menu {
      * @return void
      */
     public function cb_add_custom_role_creator_page() {
-        global $wp_roles;
-        $all_roles = new \WP_Roles();
-        include_once CRC_INCLUDE_PATH . '/templates/all_roles.php';
+        $all_roles_obj  = new \WP_Roles();
+        $all_role_names = $all_roles_obj->get_names();
+        if ( isset( $_GET['action'] ) && 'assign' === $_GET['action'] ) {
+            if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'crc_assign_role_nonce' ) ) {
+                wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+            }
+            $all_caps     = array();
+            $checked_caps = array();
+            $classes      = array();
+            foreach ( $all_roles_obj->roles as $role_name_key => $role ) {
+                if ( $role_name_key === $_GET['role'] ) {
+                    $checked_caps = array_keys( $role['capabilities'] );
+                }
+                foreach ( $role['capabilities'] as $cap_key => $value ) {
+                    if ( ! in_array( $cap_key, $all_caps, true ) ) {
+                        $all_caps[] = $cap_key;
+                    }
+                    $pre_value = array();
+                    if ( array_key_exists( $cap_key, $classes ) ) {
+                        $pre_value[]         = $classes[ $cap_key ];
+                        $pre_value[]         = $role_name_key;
+                        $classes[ $cap_key ] = implode( ' ', $pre_value );
+                    } else {
+                        $classes[ $cap_key ] = $role_name_key;
+                    }
+                }
+            }
+            sort( $all_caps );
+            $role_name         = isset( $_GET['role'] ) ? esc_html( $all_role_names[ $_GET['role'] ] ) : '';
+            $current_role_name = isset( $_GET['role'] ) ? esc_html( $_GET['role'] ) : '';
+            include_once CRC_INCLUDE_PATH . '/templates/assign_roles.php';
+        } else {
+            include_once CRC_INCLUDE_PATH . '/templates/all_roles.php';
+        }
     }
 
     /**

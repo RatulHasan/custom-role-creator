@@ -13,7 +13,6 @@
     padding: 5px;
     position: fixed;
 }
-
 .alert-warning {
     /*position: absolute;*/
     text-align: center;
@@ -31,4 +30,21 @@
 }
 tr:hover td {
     background: #FFFF95 !important;
+}
+.flex-columns {
+    column-count: 3;
+    column-gap: 3em;
+    column-rule: 1px solid #000;
+}
+.floating-button{
+    text-align: center;
+    z-index: 99999;
+    vertical-align: top;
+    background-color: #00d2b7;
+    overflow: hidden;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 5px;
+    position: fixed;
 }
