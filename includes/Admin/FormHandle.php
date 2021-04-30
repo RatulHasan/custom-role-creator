@@ -55,7 +55,7 @@ class FormHandle {
         if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'crc_delete_role_nonce' ) ) {
             wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
         }
-        $role = $_GET['role'];
+        $role = sanitize_text_field( $_GET['role'] );
         remove_role( $role );
         wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&deleted=3' );
         exit();
@@ -181,7 +181,7 @@ class FormHandle {
         }
 
         $crc_current_role_name = strtolower( str_replace( ' ', '_', sanitize_text_field( wp_unslash( $_POST['crc_current_role_name'] ) ) ) );
-        $crc_add_cap           = $_POST['crc_add_cap'];
+        $crc_add_cap           = array_map( 'sanitize_text_field', wp_unslash( $_POST['crc_add_cap'] ) );
 
         $role_object = get_role( $crc_current_role_name );
         foreach ( $role_object->capabilities as $capabilities => $value ) {
