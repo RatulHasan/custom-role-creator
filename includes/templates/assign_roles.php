@@ -33,7 +33,7 @@ if ( isset( $_GET['saved'] ) ) {
         <h1 class="wp-heading-inline"><?php esc_html_e( 'Capabilities for', 'custom-role-creator' ); ?> <u><?php echo esc_html( $role_name ); ?></u> Role</h1>
         <button name="crc_cap_submit" type="submit" class="page-title-action"><i class="fas fa-check"></i> <?php esc_html_e( 'Save Capabilities', 'custom-role-creator' ); ?></button>
         <div class="tablenav top">
-            <label for="bulk-action-selector-top"><?php esc_html_e( 'All available roles', 'custom-role-creator' ); ?></label>
+            <label for="crc_all_roles_dropdown"><?php esc_html_e( 'All available roles', 'custom-role-creator' ); ?></label>
             <select name="crc_all_roles_dropdown" id="crc_all_roles_dropdown">
                 <option value="all"><?php esc_html_e( 'All capabilities', 'custom-role-creator' ); ?></option>
                 <?php

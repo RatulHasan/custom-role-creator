@@ -163,14 +163,13 @@ if ( isset( $_GET['deleted'])) {
                             <form method="post" action="" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit_crc_role_name"><?php esc_html_e( 'Role Name', 'custom-role-creator' ); ?><span class="required">*</span></label>
-                                    <input type="hidden" name="role_id" required id="edit_role_id">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input type="text" name="crc_role_name" required id="edit_crc_role_name" class="form-control col-md-7 col-xs-12">
                                         <input type="hidden" name="crc_pre_role_name" required id="edit_crc_pre_role_name" class="form-control col-md-7 col-xs-12">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="crc_role_name"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit_crc_copy_of"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="crc_copy_of" id="edit_crc_copy_of" class="form-control">
                                             <option value="" hidden><?php esc_html_e( 'None', 'custom-role-creator' ); ?></option>
