@@ -16,13 +16,13 @@ Custom Role Creator plugin allows you to add or change user roles and capabiliti
 == Description ==
 Custom Role Creator plugin allows you to add or change user roles and capabilities easily. You can add new role or edit existing role. You can add capabilities to a role or change a roles' capability.
 Just turn on check boxes of capabilities you wish to add to the selected role and click "Save Capabilities" button to save your changes. Add new role and customize its' capabilities according to your needs. You can add role from scratch or as a copy of other existing role.
-Unnecessary role can be deleted. If there is no use for this role, you can delete that role. That's it.
-Currently supports:
-* Create new role.
-* Edit role.
-* Create new role as a copy existing role capabilities.
-* Assign capabilities to a role.
-* Delete unnecessary role.
+An unnecessary role can be deleted. If there is no use for this role, you can delete that role. That's it.
+-Currently supports:
+    * Create new role.
+    * Edit role.
+    * Create new role as a copy existing role capabilities.
+    * Assign capabilities to a role.
+    * Delete unnecessary role.
 
 The plugin is an open source project. If anyone has new ideas - pull requests are welcome!
 The development repo is [GitHub Repo](https://github.com/RatulHasan/custom-role-creator).
