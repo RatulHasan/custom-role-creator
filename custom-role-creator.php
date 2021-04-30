@@ -16,9 +16,9 @@
  * @package WordPress
  */
 
-// To prevent direct access, if not define WordPress ABSOLUTE PATH then exit.
 use CRC\Init;
 
+// To prevent direct access, if not define WordPress ABSOLUTE PATH then exit.
 if ( ! defined( 'ABSPATH' ) ) {
     exit();
 }

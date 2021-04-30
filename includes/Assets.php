@@ -11,6 +11,10 @@
 
 namespace CRC;
 
+// To prevent direct access, if not define WordPress ABSOLUTE PATH then exit.
+if ( ! defined( 'ABSPATH' ) ) {
+    exit();
+}
 /**
  * Class Assets
  *
