@@ -89,8 +89,10 @@ class FormHandle {
         $role = strtolower( str_replace( ' ', '_', $display_name ) );
         if ( ! empty( $role_object ) ) {
             $return = add_role( $role, $display_name, $role_object->capabilities );
+            flush_rewrite_rules( true );
         } else {
             $return = add_role( $role, $display_name );
+            flush_rewrite_rules( true );
         }
         if ( ! empty( $return ) ) {
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
@@ -130,6 +132,7 @@ class FormHandle {
 
         unset( $val[ $crc_pre_role_name ] );
         $return = update_option( 'wp_user_roles', $val );
+        flush_rewrite_rules( true );
 
         if ( $return ) {
             $crc_copy_of = isset( $_POST['crc_copy_of'] ) ? sanitize_text_field( $_POST['crc_copy_of'] ) : '';
@@ -139,9 +142,12 @@ class FormHandle {
                 foreach ( $new_role_object->capabilities as $capabilities => $value ) {
                     $new_role_object->remove_cap( $capabilities );
                 }
-                foreach ( $copy_role_object->capabilities as $cap => $value ) {
-                    $new_role_object->add_cap( $cap );
+                if ( ! empty( $copy_role_object ) ) {
+                    foreach ( $copy_role_object->capabilities as $cap => $value ) {
+                        $new_role_object->add_cap( $cap );
+                    }
                 }
+                flush_rewrite_rules( true );
             }
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
             exit();
@@ -170,7 +176,7 @@ class FormHandle {
         }
 
         $crc_current_role_name = strtolower( str_replace( ' ', '_', sanitize_text_field( wp_unslash( $_POST['crc_current_role_name'] ) ) ) );
-        $crc_add_cap           = sanitize_text_field( $_POST['crc_add_cap'] );
+        $crc_add_cap           = $_POST['crc_add_cap'];
 
         $role_object = get_role( $crc_current_role_name );
         foreach ( $role_object->capabilities as $capabilities => $value ) {
@@ -182,9 +188,11 @@ class FormHandle {
                 foreach ( $crc_add_cap as $value ) {
                     $role_object->add_cap( $value );
                 }
+                flush_rewrite_rules( true );
                 wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
                 exit();
             } else {
+                flush_rewrite_rules( true );
                 $role_object->add_cap( $crc_add_cap );
                 wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
                 exit();
