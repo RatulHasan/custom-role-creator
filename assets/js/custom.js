@@ -7,6 +7,7 @@
 			var role_name         = $( this ).data( 'edit_crc_role_name' );
 			$( "#edit_crc_role_name" ).val( role_display_name );
 			$( "#edit_crc_pre_role_name" ).val( role_name );
+			$( "#edit_crc_copy_of" ).val( role_name );
 		}
     );
 
@@ -21,5 +22,5 @@
     /**
      * Success message
      */
-    $( "#crc_settings_message" ).delay( 1500 ).addClass( "in" ).fadeOut( 1000 );
+    $( "#crc_settings_message" ).delay( 1500 ).addClass( "in" ).fadeOut( 1500 );
 })( jQuery );

@@ -24,6 +24,11 @@ if ( isset( $_GET['saved'] ) ) {
     <p><strong>' . esc_html__( 'Warning! Data not saved.', 'custom-role-creator' ) . '</strong></p>
   </div>';
     }
+    if ( 2 == $_GET['saved'] ) {
+        echo '<div id="crc_settings_message" class="alert-warning">
+    <p><strong>' . esc_html__( 'Warning! Name of a role can\'t be empty.', 'custom-role-creator' ) . '</strong></p>
+  </div>';
+    }
 }
 ?>
 <div class="wrap">
@@ -100,6 +105,21 @@ if ( isset( $_GET['saved'] ) ) {
                                         <input type="text" name="crc_role_name" required id="crc_role_name" class="form-control col-md-7 col-xs-12">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="crc_role_name"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="crc_copy_of" id="crc_copy_of" class="form-control">
+                                            <option value="" hidden><?php esc_html_e( 'None', 'custom-role-creator' ); ?></option>
+                                            <?php
+                                            foreach ( $all_role_names as $key => $v_all_role ) {
+                                                ?>
+                                                <option id="<?php echo esc_html( $key ); ?>" value="<?php echo esc_html( $key ); ?>"><?php echo esc_html( $v_all_role ); ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -136,6 +156,21 @@ if ( isset( $_GET['saved'] ) ) {
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input type="text" name="crc_role_name" required id="edit_crc_role_name" class="form-control col-md-7 col-xs-12">
                                         <input type="hidden" name="crc_pre_role_name" required id="edit_crc_pre_role_name" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="crc_role_name"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="crc_copy_of" id="edit_crc_copy_of" class="form-control">
+                                            <option value="" hidden><?php esc_html_e( 'None', 'custom-role-creator' ); ?></option>
+                                            <?php
+                                            foreach ( $all_role_names as $key => $v_all_role ) {
+                                                ?>
+                                                <option id="<?php echo esc_html( $key ); ?>" value="<?php echo esc_html( $key ); ?>"><?php echo esc_html( $v_all_role ); ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>

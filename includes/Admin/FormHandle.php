@@ -56,9 +56,23 @@ class FormHandle {
             wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
         }
 
-        $display_name = ucfirst( sanitize_text_field( $_POST['crc_role_name'] ) );
-        $role         = strtolower( str_replace( ' ', '_', $display_name ) );
-        $return       = add_role( $role, $display_name );
+        $crc_copy_of = isset( $_POST['crc_copy_of'] ) ? sanitize_text_field( $_POST['crc_copy_of'] ) : '';
+        if ( ! empty( $crc_copy_of ) ) {
+            $role_object = get_role( $crc_copy_of );
+        }
+
+        $display_name = isset( $_POST['crc_role_name'] ) ? ucfirst( sanitize_text_field( $_POST['crc_role_name'] ) ) : '';
+        if ( empty( $display_name ) ) {
+            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=2' );
+            exit();
+        }
+
+        $role = strtolower( str_replace( ' ', '_', $display_name ) );
+        if ( ! empty( $role_object ) ) {
+            $return = add_role( $role, $display_name, $role_object->capabilities );
+        } else {
+            $return = add_role( $role, $display_name );
+        }
         if ( ! empty( $return ) ) {
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
             exit();
@@ -99,6 +113,17 @@ class FormHandle {
         $return = update_option( 'wp_user_roles', $val );
 
         if ( $return ) {
+            $crc_copy_of = isset( $_POST['crc_copy_of'] ) ? sanitize_text_field( $_POST['crc_copy_of'] ) : '';
+            if ( ! empty( $crc_copy_of ) ) {
+                $copy_role_object = get_role( $crc_copy_of );
+                $new_role_object  = get_role( $role );
+                foreach ( $new_role_object->capabilities as $capabilities => $value ) {
+                    $new_role_object->remove_cap( $capabilities );
+                }
+                foreach ( $copy_role_object->capabilities as $cap => $value ) {
+                    $new_role_object->add_cap( $cap );
+                }
+            }
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
             exit();
         }
@@ -126,7 +151,7 @@ class FormHandle {
         }
 
         $crc_current_role_name = strtolower( str_replace( ' ', '_', sanitize_text_field( wp_unslash( $_POST['crc_current_role_name'] ) ) ) );
-        $crc_add_cap           = $_POST['crc_add_cap'];
+        $crc_add_cap           = sanitize_text_field( $_POST['crc_add_cap'] );
 
         $role_object = get_role( $crc_current_role_name );
         foreach ( $role_object->capabilities as $capabilities => $value ) {
