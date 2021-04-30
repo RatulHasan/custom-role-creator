@@ -16,7 +16,19 @@
 			var role_name = $( this ).val();
             $( ".all" ).hide();
             $( "." + role_name ).show();
+            $( "#crc_select_all_caps" ).data( 'crc_cap_value', role_name );
 		}
+    );
+
+    $( "#crc_select_all_caps" ).click(
+        function () {
+            var crc_cap_value = $( "#crc_select_all_caps" ).data( 'crc_cap_value' );
+            if ( this.checked ) {
+                $( '.' + crc_cap_value ).prop( 'checked', true );
+            } else {
+                $( '.' + crc_cap_value ).prop( 'checked', false );
+            }
+        }
     );
 
     /**

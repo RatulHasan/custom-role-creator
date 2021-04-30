@@ -45,6 +45,8 @@ if ( isset( $_GET['saved'] ) ) {
                 }
                 ?>
             </select>
+            <label for="crc_select_all_caps"><?php esc_html_e( 'Select all', 'custom-role-creator' ); ?></label>
+            <input id="crc_select_all_caps" data-crc_cap_value='all' type="checkbox">
             <br class="clear">
         </div>
         <div class="flex-columns">
@@ -53,7 +55,7 @@ if ( isset( $_GET['saved'] ) ) {
                 ?>
                 <p class="all <?php echo esc_attr( $classes[ $cap ] ); ?>">
                     <label>
-                        <input name="crc_add_cap[]" <?php echo checked( in_array( $cap, $checked_caps, true ), 1, true ); ?> type="checkbox" value="<?php echo esc_attr( $cap ); ?>"> <?php echo esc_html( $cap ); ?>
+                        <input class="all <?php echo esc_attr( $classes[ $cap ] ); ?>" name="crc_add_cap[]" <?php echo checked( in_array( $cap, $checked_caps, true ), 1, true ); ?> type="checkbox" value="<?php echo esc_attr( $cap ); ?>"> <?php echo esc_html( $cap ); ?>
                     </label>
                     <br>
                 </p>
