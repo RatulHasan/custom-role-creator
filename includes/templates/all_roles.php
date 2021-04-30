@@ -29,7 +29,9 @@ if ( isset( $_GET['saved'] ) ) {
     <p><strong>' . esc_html__( 'Warning! Name of a role can\'t be empty.', 'custom-role-creator' ) . '</strong></p>
   </div>';
     }
-    if ( 3 == $_GET['deleted'] ) {
+}
+if ( isset( $_GET['deleted'])) {
+    if ( 3 == $_GET[ 'deleted' ] ) {
         echo '<div id="crc_settings_message" class="alert-success">
     <p><strong>' . esc_html__( 'Success! Data have been deleted.', 'custom-role-creator' ) . '</strong></p>
   </div>';
