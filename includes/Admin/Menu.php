@@ -83,8 +83,8 @@ class Menu {
                 }
             }
             sort( $all_caps );
-            $role_name         = isset( $_GET['role'] ) ? esc_html( $all_role_names[ $_GET['role'] ] ) : '';
-            $current_role_name = isset( $_GET['role'] ) ? esc_html( $_GET['role'] ) : '';
+            $role_name         = isset( $_GET['role'] ) ? sanitize_text_field( $all_role_names[ $_GET['role'] ] ) : '';
+            $current_role_name = isset( $_GET['role'] ) ? sanitize_text_field( $_GET['role'] ) : '';
             include_once CRC_INCLUDE_PATH . '/templates/assign_roles.php';
         } else {
             include_once CRC_INCLUDE_PATH . '/templates/all_roles.php';
