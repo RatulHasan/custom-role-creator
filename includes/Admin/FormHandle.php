@@ -211,17 +211,4 @@ class FormHandle {
         wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
         exit();
     }
-
-    /**
-     * Reset all roles.
-     *
-     * @return void
-     */
-	public function cb_crc_reset_role() {
-        if ( ! function_exists( 'populate_roles' ) ) {
-            require_once ABSPATH . 'wp-admin/includes/schema.php';
-        }
-
-        populate_roles();
-    }
 }
