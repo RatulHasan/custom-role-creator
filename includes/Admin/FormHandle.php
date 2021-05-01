@@ -99,10 +99,8 @@ class FormHandle {
         $role = strtolower( str_replace( ' ', '_', $display_name ) );
         if ( ! empty( $role_object ) ) {
             $return = add_role( $role, $display_name, $role_object->capabilities );
-            flush_rewrite_rules( true );
         } else {
             $return = add_role( $role, $display_name );
-            flush_rewrite_rules( true );
         }
         if ( ! empty( $return ) ) {
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
@@ -142,7 +140,6 @@ class FormHandle {
 
         unset( $val[ $crc_pre_role_name ] );
         $return = update_option( 'wp_user_roles', $val );
-        flush_rewrite_rules( true );
 
         if ( $return ) {
             $crc_copy_of = isset( $_POST['crc_copy_of'] ) ? sanitize_text_field( $_POST['crc_copy_of'] ) : '';
@@ -157,7 +154,6 @@ class FormHandle {
                         $new_role_object->add_cap( $cap );
                     }
                 }
-                flush_rewrite_rules( true );
             }
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
             exit();
@@ -198,11 +194,9 @@ class FormHandle {
                 foreach ( $crc_add_cap as $value ) {
                     $role_object->add_cap( $value );
                 }
-                flush_rewrite_rules( true );
                 wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
                 exit();
             } else {
-                flush_rewrite_rules( true );
                 $role_object->add_cap( $crc_add_cap );
                 wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
                 exit();
@@ -210,5 +204,18 @@ class FormHandle {
         }
         wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
         exit();
+    }
+
+    /**
+     * Reset all roles.
+     *
+     * @return void
+     */
+	protected function cb_crc_reset_role() {
+        if ( ! function_exists( 'populate_roles' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/schema.php';
+        }
+
+        populate_roles();
     }
 }
