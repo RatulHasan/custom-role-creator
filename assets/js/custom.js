@@ -34,5 +34,5 @@
     /**
      * Success message
      */
-    $( "#crc_settings_message" ).delay( 1500 ).addClass( "in" ).fadeOut( 1500 );
+    $( "#crc_settings_message" ).delay( 1500 ).addClass( "in" ).fadeOut( 2000 );
 })( jQuery );
