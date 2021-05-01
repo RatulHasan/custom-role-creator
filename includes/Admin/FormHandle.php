@@ -55,9 +55,14 @@ class FormHandle {
         if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'crc_delete_role_nonce' ) ) {
             wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
         }
-        $role = sanitize_text_field( $_GET['role'] );
-        remove_role( $role );
-        wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&deleted=3' );
+        $role        = sanitize_text_field( $_GET['role'] );
+        $role_object = get_role( $role );
+        if ( ! empty( $role_object ) ) {
+            remove_role( $role );
+            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&deleted=3' );
+            exit();
+        }
+        wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&deleted=4' );
         exit();
     }
 

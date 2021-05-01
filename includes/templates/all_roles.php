@@ -36,6 +36,11 @@ if ( isset( $_GET['deleted'])) {
     <p><strong>' . esc_html__( 'Success! Data have been deleted.', 'custom-role-creator' ) . '</strong></p>
   </div>';
     }
+    if ( 4 == $_GET[ 'deleted' ] ) {
+        echo '<div id="crc_settings_message" class="alert-warning">
+    <p><strong>' . esc_html__( 'Warning! This is not a valid role.', 'custom-role-creator' ) . '</strong></p>
+  </div>';
+    }
 }
 ?>
 <div class="wrap">
