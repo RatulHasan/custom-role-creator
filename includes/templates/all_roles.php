@@ -41,10 +41,10 @@ if ( isset( $_GET['deleted'])) {
 <div class="wrap">
     <div class="box-header">
         <h1 class="wp-heading-inline"><?php esc_html_e( 'All Roles', 'custom-role-creator' ); ?></h1>
-        <a href="#myRole" data-toggle="modal" class="page-title-action"><?php esc_html_e( 'Add New Role', 'custom-role-creator' ); ?></a>
+        <a href="#myRole" data-bs-toggle="modal" class="page-title-action"><?php esc_html_e( 'Add New Role', 'custom-role-creator' ); ?></a>
     </div>
     <div class="box-body table-responsive">
-        <table class="table table-responsive table-bordered wp-list-table widefat fixed striped table-view-list posts">
+        <table class="table table-bordered border-dark wp-list-table widefat fixed striped table-view-list posts">
             <thead>
             <tr>
                 <th width="10%"><?php esc_html_e( 'SL', 'custom-role-creator' ); ?></th>
@@ -69,15 +69,15 @@ if ( isset( $_GET['deleted'])) {
                 <tr>
                     <td><?php echo esc_html( $i ); ?></td>
                     <td><?php echo esc_html( $v_all_role ); ?></td>
-                    <td class="text-right"><?php echo esc_html( $count ); ?></td>
-                    <td class="text-right">
+                    <td class="text-sm-end"><?php echo esc_html( $count ); ?></td>
+                    <td class="text-sm-end">
                         <?php
                         if ( 'administrator' !== $key ) {
                             ?>
                             <a href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=assign&_wpnonce=<?php echo esc_attr( $nonce ); ?>" class="btn btn-success btn-flat btn-xs edit_button">
                                 <i class="fas fa-cogs"></i> <?php esc_html_e( 'Assign capabilities', 'custom-role-creator' ); ?>
                             </a>
-                            <button type="button" class="btn btn-primary btn-flat btn-xs crc_role_edit_button" data-toggle="modal" data-target="#myRoleEdit" data-edit_crc_role_display_name="<?php echo esc_attr( $v_all_role ); ?>" data-edit_crc_role_name="<?php echo esc_attr( $key ); ?>">
+                            <button type="button" class="btn btn-primary btn-flat btn-xs crc_role_edit_button" data-bs-toggle="modal" data-bs-target="#myRoleEdit" data-edit_crc_role_display_name="<?php echo esc_attr( $v_all_role ); ?>" data-edit_crc_role_name="<?php echo esc_attr( $key ); ?>">
                                 <i class="fas fa-pencil-alt"></i> <?php esc_html_e( 'Edit role', 'custom-role-creator' ); ?>
                             </button>
                             <a onclick="return confirm('<?php esc_html_e( 'Confirm to delete?', 'custom-role-creator' ); ?>')" href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=delete&_wpnonce=<?php echo esc_attr( $delete_nonce ); ?>" class="btn btn-danger btn-flat btn-xs delete_button">
@@ -100,25 +100,25 @@ if ( isset( $_GET['deleted'])) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h3 class="modal-title"><?php esc_html_e( 'Create Role', 'custom-role-creator' ); ?></h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-12 col-12 col-12">
                         <div class="x_content">
                             <form method="post" action="" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="crc_role_name"><?php esc_html_e( 'Role Name', 'custom-role-creator' ); ?>
+                                    <label class="control-label col-3 col-3 col-12" for="crc_role_name"><?php esc_html_e( 'Role Name', 'custom-role-creator' ); ?>
                                         <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="crc_role_name" required id="crc_role_name" class="form-control col-md-7 col-xs-12">
+                                    <div class="col-6 col-6 col-12">
+                                        <input type="text" name="crc_role_name" required id="crc_role_name" class="form-control col-7 col-12">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="crc_role_name"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label class="control-label col-3 col-3 col-12" for="crc_copy_of"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
+                                    <div class="col-6 col-6 col-12">
                                         <select name="crc_copy_of" id="crc_copy_of" class="form-control">
                                             <option value="" hidden><?php esc_html_e( 'None', 'custom-role-creator' ); ?></option>
                                             <?php
@@ -131,10 +131,10 @@ if ( isset( $_GET['deleted'])) {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button type="submit" id="crc_new_role_submit" name="crc_new_role_submit" class="btn btn-info btn-flat btn-xs">
+                                <div class="row mt-20">
+                                    <div class="col-auto me-auto"></div>
+                                    <div class="col-auto">
+                                        <button type="submit" id="crc_new_role_submit" name="crc_new_role_submit" class="btn btn-info btn-flat btn-sm">
                                             <i class="fas fa-check"></i> <?php esc_html_e( 'Save', 'custom-role-creator' ); ?></button>
                                     </div>
                                 </div>
@@ -153,24 +153,24 @@ if ( isset( $_GET['deleted'])) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h3 class="modal-title"><?php esc_html_e( 'Update Role', 'custom-role-creator' ); ?> </h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-12 col-12 col-12">
                         <div class="x_content">
                             <form method="post" action="" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit_crc_role_name"><?php esc_html_e( 'Role Name', 'custom-role-creator' ); ?><span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="crc_role_name" required id="edit_crc_role_name" class="form-control col-md-7 col-xs-12">
-                                        <input type="hidden" name="crc_pre_role_name" required id="edit_crc_pre_role_name" class="form-control col-md-7 col-xs-12">
+                                    <label class="control-label col-3 col-3 col-12" for="edit_crc_role_name"><?php esc_html_e( 'Role Name', 'custom-role-creator' ); ?><span class="required">*</span></label>
+                                    <div class="col-6 col-6 col-12">
+                                        <input type="text" name="crc_role_name" required id="edit_crc_role_name" class="form-control col-7 col-12">
+                                        <input type="hidden" name="crc_pre_role_name" required id="edit_crc_pre_role_name" class="form-control col-7 col-12">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit_crc_copy_of"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label class="control-label col-3 col-3 col-12" for="edit_crc_copy_of"><?php esc_html_e( 'Make copy of', 'custom-role-creator' ); ?></label>
+                                    <div class="col-6 col-6 col-12">
                                         <select name="crc_copy_of" id="edit_crc_copy_of" class="form-control">
                                             <option value="" hidden><?php esc_html_e( 'None', 'custom-role-creator' ); ?></option>
                                             <?php
@@ -183,10 +183,10 @@ if ( isset( $_GET['deleted'])) {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button type="submit" id="crc_role_update" name="crc_role_update" class="btn btn-info btn-flat btn-xs">
+                                <div class="row mt-20">
+                                    <div class="col-auto me-auto"></div>
+                                    <div class="col-auto">
+                                        <button type="submit" id="crc_role_update" name="crc_role_update" class="btn btn-info btn-flat btn-sm">
                                             <i class="fas fa-pencil-alt"></i> <?php esc_html_e( 'Update', 'custom-role-creator' ); ?></button>
                                     </div>
                                 </div>

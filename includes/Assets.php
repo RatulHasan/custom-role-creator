@@ -48,16 +48,14 @@ class Assets {
         }
 
         if ( 'users_page_custom-role-creator' === $screen ) {
-            wp_enqueue_style( 'bootstrap' );
-            wp_enqueue_style( 'AdminLTE' );
+            wp_enqueue_style( 'crc_bootstrap' );
             wp_enqueue_style( 'crc_custom_css' );
-            wp_enqueue_style( 'my-font-awesome-css' );
-            wp_enqueue_script( 'bootstrap-scripts' );
+            wp_enqueue_style( 'crc_my-font-awesome-css' );
+            wp_enqueue_script( 'crc_bootstrap-scripts' );
             wp_enqueue_script( 'crc_custom_js' );
 
             if ( isset( $_GET['role'] ) && 'assign' === $_GET['action'] ) {
-                wp_dequeue_style( 'bootstrap' );
-                wp_dequeue_style( 'AdminLTE' );
+                wp_dequeue_style( 'crc_bootstrap' );
             }
         }
     }
@@ -69,22 +67,17 @@ class Assets {
      */
     public function get_admin_styles() {
         return array(
-            'AdminLTE'            => array(
-                'src'  => CRC_ASSETS . '/css/AdminLTE.min.css',
-                'deps' => array( 'bootstrap' ),
-                'ver'  => CRC_VERSION,
-            ),
-            'crc_custom_css'      => array(
+            'crc_custom_css'          => array(
                 'src'  => CRC_ASSETS . '/css/custom.min.css',
                 'deps' => array(),
                 'ver'  => CRC_VERSION,
             ),
-            'bootstrap'           => array(
-                'src'  => CRC_ASSETS . '/css/bootstrap/dist/css/bootstrap.min.css',
+            'crc_bootstrap'           => array(
+                'src'  => CRC_ASSETS . '/css/bootstrap-5/css/bootstrap.min.css',
                 'deps' => array(),
                 'ver'  => CRC_VERSION,
             ),
-            'my-font-awesome-css' => array(
+            'crc_my-font-awesome-css' => array(
                 'src'  => MY_GITHUB_ASSETS . '/fontawesome-free-5.15.3/css/all.min.css',
                 'deps' => array(),
                 'ver'  => CRC_VERSION,
@@ -100,13 +93,13 @@ class Assets {
      */
     public function get_admin_scripts() {
         return array(
-            'crc_custom_js'     => array(
+            'crc_custom_js'         => array(
                 'src'  => CRC_ASSETS . '/js/custom.min.js',
                 'deps' => array( 'jquery' ),
                 'ver'  => CRC_VERSION,
             ),
-            'bootstrap-scripts' => array(
-                'src'  => CRC_ASSETS . '/css/bootstrap/dist/js/bootstrap.min.js',
+            'crc_bootstrap-scripts' => array(
+                'src'  => CRC_ASSETS . '/css/bootstrap-5/js/bootstrap.min.js',
                 'deps' => array( 'jquery' ),
                 'ver'  => CRC_VERSION,
             ),
