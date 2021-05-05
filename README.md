@@ -10,6 +10,22 @@ An unnecessary role can be deleted. If there is no use for this role, you can de
     * Create a new role as a copy existing role capabilities.
     * Assign capabilities to a role.
     * Delete unnecessary role.
+    
+### Screenshot
+All Roles
+![All Roles](https://ps.w.org/custom-role-creator/assets/Screenshot-1.png?rev=2526783)
+
+Add a new role
+![Add a new role](https://ps.w.org/custom-role-creator/assets/Screenshot-2.png?rev=2526783)
+
+Edit role
+![Edit role](https://ps.w.org/custom-role-creator/assets/Screenshot-3.png?rev=2526783)
+
+Assign capabilities
+![Assign capabilities](https://ps.w.org/custom-role-creator/assets/Screenshot-4.png?rev=2526783)
+
+Currently capable of
+![Currently capable of](https://ps.w.org/custom-role-creator/assets/Screenshot-5.png?rev=2526783)
 
 ### Changelog
 = 1.0.0 =
