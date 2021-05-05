@@ -78,7 +78,7 @@ class Assets {
                 'ver'  => CRC_VERSION,
             ),
             'crc_my-font-awesome-css' => array(
-                'src'  => MY_GITHUB_ASSETS . '/fontawesome-free-5.15.3/css/all.min.css',
+                'src'  => CRC_ASSETS . '/fontawesome-free-5.15.3/css/all.min.css',
                 'deps' => array(),
                 'ver'  => CRC_VERSION,
             ),
