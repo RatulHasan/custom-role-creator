@@ -144,14 +144,11 @@ class FormHandle {
         if ( $return ) {
             $crc_copy_of = isset( $_POST['crc_copy_of'] ) ? sanitize_text_field( $_POST['crc_copy_of'] ) : '';
             if ( ! empty( $crc_copy_of ) ) {
+                $wp_roles         = new \WP_Roles();
                 $copy_role_object = get_role( $crc_copy_of );
-                $new_role_object  = get_role( $role );
-                foreach ( $new_role_object->capabilities as $capabilities => $value ) {
-                    $new_role_object->remove_cap( $capabilities );
-                }
                 if ( ! empty( $copy_role_object ) ) {
                     foreach ( $copy_role_object->capabilities as $cap => $value ) {
-                        $new_role_object->add_cap( $cap );
+                        $wp_roles->add_cap( $role, $cap );
                     }
                 }
             }
