@@ -46,6 +46,8 @@ No, Not yet. I'm trying to manage this - [Contribute](https://github.com/RatulHa
 3. Edit role
 4. Assign capabilities
 5. Currently capable of
+6. Add capabilities to User
+7. Reset Roles
 
 == Changelog ==
 = 1.1.0 =
