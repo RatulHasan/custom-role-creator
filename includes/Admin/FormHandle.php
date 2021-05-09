@@ -345,7 +345,7 @@ class FormHandle {
             wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
         }
 
-        $get_crc_role = get_option( 'crc_all_roles' );
+        $get_crc_role = get_option( '_crc_all_roles' );
         if ( empty( $get_crc_role ) ) {
             return;
         }
@@ -357,7 +357,7 @@ class FormHandle {
         foreach ( $get_crc_role['roles'] as $role_name => $role_info ) {
             remove_role( $role_name );
         }
-        delete_option( 'crc_all_roles' );
+        delete_option( '_crc_all_roles' );
 
         wp_safe_redirect( admin_url() . 'options-general.php?page=crc-settings&saved=1' );
         exit();
@@ -377,19 +377,19 @@ class FormHandle {
         }
 
         if ( 'add_role' === $action ) {
-            $get_crc_role = get_option( 'crc_all_roles' );
+            $get_crc_role = get_option( '_crc_all_roles' );
 
             $get_crc_role['roles'][ $role_name ] = $role_name;
-            update_option( 'crc_all_roles', $get_crc_role );
+            update_option( '_crc_all_roles', $get_crc_role );
         }
 
         if ( 'delete_role' === $action ) {
-            $get_crc_role = get_option( 'crc_all_roles' );
+            $get_crc_role = get_option( '_crc_all_roles' );
             if ( empty( $get_crc_role ) ) {
                 return;
             }
             unset( $get_crc_role['roles'][ $role_name ] );
-            update_option( 'crc_all_roles', $get_crc_role );
+            update_option( '_crc_all_roles', $get_crc_role );
         }
     }
 }
