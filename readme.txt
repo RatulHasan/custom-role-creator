@@ -1,9 +1,9 @@
 === Custom Role Creator (CRC) ===
 Plugin Name: Custom Role Creator (CRC)
-Version: 1.0.0
+Version: 1.1.0
 Author: Ratul Hasan
 Contributors: ratulhasan
-Tags: user, role, editor, security, access, permission, capability, crc
+Tags: user, role, editor, security, access, permission, capability, crc,
 Requires at least: 5.2
 Tested up to: 5.7.1
 Requires PHP: 5.6
@@ -23,6 +23,9 @@ An unnecessary role can be deleted. If there is no use for this role, you can de
 - Create new role as a copy existing role capabilities.
 - Assign capabilities to a role.
 - Delete unnecessary role.
+- Assign capabilities to individual users'.
+- Reset Custom Role Creator Made Roles To Default.
+- Restore roles and capabilities to default as WordPress Core.
 
 The plugin is an open source project. If anyone has new ideas - pull requests are welcome!
 The development repo is [GitHub Repo](https://github.com/RatulHasan/custom-role-creator).
@@ -45,5 +48,10 @@ No, Not yet. I'm trying to manage this - [Contribute](https://github.com/RatulHa
 5. Currently capable of
 
 == Changelog ==
+= 1.1.0 =
+* Assign capabilities to individual users'.
+* Reset Custom Role Creator Made Roles To Default.
+* Restore roles and capabilities to default as WordPress Core.
+
 = 1.0.0 =
 * Initial Release

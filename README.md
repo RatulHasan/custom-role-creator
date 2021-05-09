@@ -10,6 +10,9 @@ An unnecessary role can be deleted. If there is no use for this role, you can de
     * Create a new role as a copy existing role capabilities.
     * Assign capabilities to a role.
     * Delete unnecessary role.
+    * Assign capabilities to individual users'.
+    * Reset Custom Role Creator Made Roles To Default.
+    * Restore roles and capabilities to default as WordPress Core.
     
 ### Screenshot
 All Roles
@@ -28,5 +31,10 @@ Currently capable of
 ![Currently capable of](https://ps.w.org/custom-role-creator/assets/Screenshot-5.png)
 
 ### Changelog
+= 1.1.0 =
+* Assign capabilities to individual users'.
+* Reset Custom Role Creator Made Roles To Default.
+* Restore roles and capabilities to default as WordPress Core.
+
 = 1.0.0 =
 * Initial Release
