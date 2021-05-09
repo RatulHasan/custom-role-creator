@@ -3,7 +3,7 @@
  * Plugin Name:         Custom Role Creator (CRC)
  * Plugin URI:          https://github.com/RatulHasan/custom-role-creator
  * Description:         Custom Role Creator plugin allows you to add or change user roles and capabilities easily.
- * Version:             1.0.0
+ * Version:             1.1.0
  * Requires PHP:        5.6
  * Requires at least:   5.2
  * Author:              Ratul Hasan
