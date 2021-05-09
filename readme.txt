@@ -36,10 +36,6 @@ Installation is fairly straight forward. Install it from the WordPress plugin re
 = Bugs, technical hints or contribute =
 Please give us feedback, contribute and file technical bugs on [GitHub Repo](https://github.com/RatulHasan/custom-role-creator).
 
-== Frequently Asked Questions ==
-= Does it work with WordPress in multi-site environment? =
-No, Not yet. I'm trying to manage this - [Contribute](https://github.com/RatulHasan/custom-role-creator)!
-
 == Screenshots ==
 1. All Roles
 2. Add new role
