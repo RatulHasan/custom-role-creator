@@ -196,6 +196,10 @@ class Menu {
      * @return void
      */
     public function cb_add_custom_role_creator_settings_page() {
+        $crc_title_text = __( 'Reset Custom Role Creator Made Roles To Default!', 'custom-role-creator' );
+        $crc_text       = "<span class='crc-color-red'>" . __( 'WARNING!', 'custom-role-creator' ) . '</span> ' . __( 'Reset Custom Role Creator Made Roles To Default will delete roles which is created by Custom Role Creator.', 'custom-role-creator' ) . '
+            <br>' . __( 'If you have set any user\'s role made by Custom Role Creator, those changes will be', 'custom-role-creator' ) . " <span class='crc-color-red'>" . __( 'LOST FOREVER!', 'custom-role-creator' ) . '</span><br /><br />';
+
         $title_text = __( 'Reset User Roles And Capabilities To Default!', 'custom-role-creator' );
         $text       = "<span class='crc-color-red'>" . __( 'WARNING!', 'custom-role-creator' ) . '</span> ' . __( 'Reset to default will set default user roles and capabilities from WordPress core.', 'custom-role-creator' ) . '
             <br>' . __( 'If any plugins (such as WooCommerce, Dokan and/or many others) have changed user roles and capabilities during installation, those changes will be', 'custom-role-creator' ) . " <span class='crc-color-red'>" . __( 'LOST FOREVER!', 'custom-role-creator' ) . '</span><br /><br />';

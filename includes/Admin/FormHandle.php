@@ -51,6 +51,10 @@ class FormHandle {
         if ( isset( $_POST['crc_reset_to_default_submit'] ) ) {
             $this->crc_reset_to_default();
         }
+
+        if ( isset( $_POST['crc_delete_custom_roles_to_default_submit'] ) ) {
+            $this->crc_delete_custom_roles_to_default();
+        }
     }
 
     /**
@@ -65,6 +69,7 @@ class FormHandle {
         $role        = sanitize_text_field( $_GET['role'] );
         $role_object = get_role( $role );
         if ( ! empty( $role_object ) ) {
+            $this->crc_custom_role( $role, 'delete_role' );
             remove_role( $role );
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&deleted=3' );
             exit();
@@ -106,8 +111,14 @@ class FormHandle {
         $role = strtolower( str_replace( ' ', '_', $display_name ) );
         if ( ! empty( $role_object ) ) {
             $return = add_role( $role, $display_name, $role_object->capabilities );
+            if ( ! empty( $return ) ) {
+                $this->crc_custom_role( $role, 'add_role' );
+            }
         } else {
             $return = add_role( $role, $display_name );
+            if ( ! empty( $return ) ) {
+                $this->crc_custom_role( $role, 'add_role' );
+            }
         }
         if ( ! empty( $return ) ) {
             wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
@@ -146,9 +157,11 @@ class FormHandle {
         $val[ $role ]                      = $val[ $crc_pre_role_name ];
 
         unset( $val[ $crc_pre_role_name ] );
+        $this->crc_custom_role( $crc_pre_role_name, 'delete_role' );
         $return = update_option( 'wp_user_roles', $val );
-
         if ( $return ) {
+            $this->crc_custom_role( $role, 'add_role' );
+
             $crc_copy_of = isset( $_POST['crc_copy_of'] ) ? sanitize_text_field( $_POST['crc_copy_of'] ) : '';
             if ( ! empty( $crc_copy_of ) ) {
                 $wp_roles         = new \WP_Roles();
@@ -270,7 +283,6 @@ class FormHandle {
         if ( ! isset( $_POST['crc_reset_to_default_submit'] ) ) {
             return;
         }
-
         $nonce = isset( $_POST['crc_reset_roles_to_default_fields'] ) ? sanitize_text_field( wp_unslash( $_POST['crc_reset_roles_to_default_fields'] ) ) : '';
         if ( ! wp_verify_nonce( $nonce, 'crc_reset_roles_to_default' ) ) {
             wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
@@ -313,5 +325,71 @@ class FormHandle {
 
         wp_safe_redirect( admin_url() . 'options-general.php?page=crc-settings&saved=1' );
         exit();
+    }
+
+    /**
+     * Reset to default, Here we go!
+     *
+     * @return void
+     */
+    public function crc_delete_custom_roles_to_default() {
+        if ( ! isset( $_POST['crc_delete_custom_roles_to_default_submit'] ) ) {
+            return;
+        }
+        $nonce = isset( $_POST['crc_delete_custom_roles_to_default_fields'] ) ? sanitize_text_field( wp_unslash( $_POST['crc_delete_custom_roles_to_default_fields'] ) ) : '';
+        if ( ! wp_verify_nonce( $nonce, 'crc_delete_custom_roles_to_default' ) ) {
+            wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+        }
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+        }
+
+        $get_crc_role = get_option( 'crc_all_roles' );
+        if ( empty( $get_crc_role ) ) {
+            return;
+        }
+        global $wp_roles;
+        if ( ! isset( $wp_roles ) ) {
+            $wp_roles = new \WP_Roles();
+        }
+
+        foreach ( $get_crc_role['roles'] as $role_name => $role_info ) {
+            remove_role( $role_name );
+        }
+        delete_option( 'crc_all_roles' );
+
+        wp_safe_redirect( admin_url() . 'options-general.php?page=crc-settings&saved=1' );
+        exit();
+    }
+
+    /**
+     * To save or delete crc custom role.
+     *
+     * @param string $role_name role name.
+     * @param string $action add or delete action.
+     *
+     * @return void
+     */
+    protected function crc_custom_role( $role_name, $action ) {
+        if ( ! isset( $action ) ) {
+            return;
+        }
+
+        if ( 'add_role' === $action ) {
+            $get_crc_role = get_option( 'crc_all_roles' );
+
+            $get_crc_role['roles'][ $role_name ] = $role_name;
+            update_option( 'crc_all_roles', $get_crc_role );
+        }
+
+        if ( 'delete_role' === $action ) {
+            $get_crc_role = get_option( 'crc_all_roles' );
+            if ( empty( $get_crc_role ) ) {
+                return;
+            }
+            unset( $get_crc_role['roles'][ $role_name ] );
+            update_option( 'crc_all_roles', $get_crc_role );
+        }
     }
 }
