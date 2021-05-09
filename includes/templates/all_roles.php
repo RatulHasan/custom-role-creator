@@ -79,7 +79,7 @@ if ( isset( $_GET['deleted'])) {
                         <?php
                         if ( 'administrator' !== $key ) {
                             ?>
-                            <a href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=assign&_wpnonce=<?php echo esc_attr( $nonce ); ?>" class="btn btn-success btn-flat btn-xs edit_button">
+                            <a href="users.php?page=custom-role-creator&object=role&role=<?php echo esc_html( $key ); ?>&action=assign&_wpnonce=<?php echo esc_attr( $nonce ); ?>" class="btn btn-success btn-flat btn-xs edit_button">
                                 <i class="fas fa-cogs"></i> <?php esc_html_e( 'Assign capabilities', 'custom-role-creator' ); ?>
                             </a>
                             <button type="button" class="btn btn-primary btn-flat btn-xs crc_role_edit_button" data-bs-toggle="modal" data-bs-target="#myRoleEdit" data-edit_crc_role_display_name="<?php echo esc_attr( $v_all_role ); ?>" data-edit_crc_role_name="<?php echo esc_attr( $key ); ?>">
