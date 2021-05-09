@@ -31,6 +31,10 @@ class FormHandle {
             $this->cb_crc_role_delete();
         }
 
+        if ( isset( $_GET['action'] ) && 'assign' === $_GET['action'] && 'user' === $_GET['object'] ) {
+            $this->cb_crc_user_role_update();
+        }
+
         if ( ! isset( $_POST ) ) {
             return;
         }
@@ -43,6 +47,9 @@ class FormHandle {
         }
         if ( isset( $_POST['crc_cap_submit'] ) ) {
             $this->cb_crc_cap_submit();
+        }
+        if ( isset( $_POST['crc_reset_to_default_submit'] ) ) {
+            $this->crc_reset_to_default();
         }
     }
 
@@ -194,12 +201,117 @@ class FormHandle {
                 wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
                 exit();
             } else {
-                $role_object->add_cap( $crc_add_cap );
-                wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
+                wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=0' );
                 exit();
             }
         }
-        wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=1' );
+        wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&saved=0' );
+        exit();
+    }
+
+    /**
+     * Callback for crc user role capabilities update.
+     *
+     * @return bool|void
+     */
+    public function cb_crc_user_role_update() {
+        if ( ! isset( $_POST['crc_cap_submit'] ) ) {
+            return;
+        }
+
+        $nonce = isset( $_POST['crc_assign_cap_form_field'] ) ? sanitize_text_field( wp_unslash( $_POST['crc_assign_cap_form_field'] ) ) : '';
+        if ( ! wp_verify_nonce( $nonce, 'crc_assign_cap_form' ) ) {
+            wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+        }
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+        }
+
+        $crc_add_cap = array_map( 'sanitize_text_field', wp_unslash( $_POST['crc_add_cap'] ) );
+        $nonce       = wp_create_nonce( 'crc_assign_user_cap_nonce' );
+
+        $user_id = sanitize_text_field( wp_unslash( $_GET['user_id'] ) );
+        $user    = new \WP_User( $user_id );
+        if ( ! empty( $crc_add_cap ) ) {
+            if ( ! empty( $user->data->user_login ) ) {
+                if ( is_array( $crc_add_cap ) ) {
+                    foreach ( $user->roles as $role ) {
+                        $crc_add_cap[] = $role;
+                    }
+                    $user->remove_all_caps();
+                    foreach ( $crc_add_cap as $value ) {
+                        $user->add_cap( $value );
+                    }
+
+                    wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=1' );
+                    exit();
+                } else {
+                    wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=0' );
+                    exit();
+                }
+            }
+
+            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=0' );
+            exit();
+        } else {
+            $user->remove_all_caps();
+            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=1' );
+            exit();
+        }
+    }
+
+    /**
+     * Reset to default, Here we go!
+     *
+     * @return void
+     */
+    public function crc_reset_to_default() {
+        if ( ! isset( $_POST['crc_reset_to_default_submit'] ) ) {
+            return;
+        }
+
+        $nonce = isset( $_POST['crc_reset_roles_to_default_fields'] ) ? sanitize_text_field( wp_unslash( $_POST['crc_reset_roles_to_default_fields'] ) ) : '';
+        if ( ! wp_verify_nonce( $nonce, 'crc_reset_roles_to_default' ) ) {
+            wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+        }
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
+        }
+
+        global $wp_roles;
+        if ( ! isset( $wp_roles ) ) {
+            $wp_roles = new \WP_Roles();
+        }
+
+        if ( ! function_exists( 'populate_roles' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/schema.php';
+        }
+
+        foreach ( $wp_roles->roles as $role_name => $role_info ) {
+            $role = get_role( $role_name );
+            foreach ( $role_info['capabilities'] as $capability => $capability_value ) {
+                $role->remove_cap( $capability );
+            }
+            remove_role( $role_name );
+        }
+
+		// Reset role to default.
+        populate_roles();
+
+        $all_users = get_users();
+        if ( ! empty( $all_users ) ) {
+            foreach ( $all_users as $user ) {
+                $user_wp = new \WP_User( $user->data->ID );
+                foreach ( $user_wp->roles as $role_info ) {
+                    $user_wp->remove_all_caps();
+                    $user_wp->add_role( $role_info );
+                }
+            }
+        }
+
+        wp_safe_redirect( admin_url() . 'options-general.php?page=crc-settings&saved=1' );
         exit();
     }
 }
