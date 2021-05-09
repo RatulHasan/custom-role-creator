@@ -32,10 +32,10 @@ Currently capable of
 
 
 Add capabilities to User
-![Currently capable of](https://ps.w.org/custom-role-creator/assets/Screenshot-6.png)
+![Add capabilities to User](https://ps.w.org/custom-role-creator/assets/Screenshot-6.png)
 
 Reset Roles
-![Currently capable of](https://ps.w.org/custom-role-creator/assets/Screenshot-7.png)
+![Reset Roles](https://ps.w.org/custom-role-creator/assets/Screenshot-7.png)
 
 ### Changelog
 = 1.1.0 =
