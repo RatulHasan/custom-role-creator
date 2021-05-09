@@ -47,7 +47,7 @@ class Assets {
             wp_register_script( $handle, $script['src'], $script['deps'], $script['ver'], true );
         }
 
-        if ( 'users_page_custom-role-creator' === $screen ) {
+        if ( 'users_page_custom-role-creator' === $screen || 'settings_page_crc-settings' === $screen ) {
             wp_enqueue_style( 'crc_bootstrap' );
             wp_enqueue_style( 'crc_custom_css' );
             wp_enqueue_style( 'crc_my-font-awesome-css' );
