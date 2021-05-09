@@ -16,3 +16,4 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 // Delete All Core Data.
 delete_option( '_custom_role_creator_installed' );
 delete_option( '_custom_role_creator_version' );
+delete_option( '_crc_all_roles' );
