@@ -30,7 +30,7 @@ if ( isset( $_GET['saved'] ) ) {
     <form id="crc_assign_cap_form" action="" method="post">
         <input name="crc_current_role_name"  type="hidden" value="<?php echo esc_attr( $current_role_name ); ?>">
         <?php wp_nonce_field( 'crc_assign_cap_form', 'crc_assign_cap_form_field' ); ?>
-        <h1 class="wp-heading-inline"><?php esc_html_e( 'Capabilities for', 'custom-role-creator' ); ?> <u><?php echo esc_html( $role_name ); ?></u> Role</h1>
+        <h1 class="wp-heading-inline"><?php esc_html_e( 'Capabilities for', 'custom-role-creator' ); ?> <u><?php echo esc_html( $role_name ); ?></u></h1>
         <button name="crc_cap_submit" type="submit" class="page-title-action"><i class="fas fa-check"></i> <?php esc_html_e( 'Save Capabilities', 'custom-role-creator' ); ?></button>
         <div class="tablenav top">
             <label for="crc_all_roles_dropdown"><?php esc_html_e( 'All available roles', 'custom-role-creator' ); ?></label>
@@ -49,6 +49,7 @@ if ( isset( $_GET['saved'] ) ) {
             <input id="crc_select_all_caps" data-crc_cap_value='all' type="checkbox">
             <br class="clear">
         </div>
+        <hr/>
         <div class="flex-columns">
             <?php
             foreach ( $all_caps as $cap ) {
