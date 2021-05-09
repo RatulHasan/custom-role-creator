@@ -48,6 +48,15 @@ tr:hover td {
     padding: 5px;
     position: fixed;
 }
+.crc-bordered-box-red{
+    border: 1px solid red;
+    background-color: #fff5f5;
+    padding: 20px;
+    text-align:left;
+}
+.crc-color-red{
+    color: red;
+}
 .btn-xs,
 .btn-group-xs > .btn {
     padding: 1px 5px;

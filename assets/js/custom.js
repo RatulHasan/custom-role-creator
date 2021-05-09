@@ -30,7 +30,45 @@
             }
         }
     );
-
+    $( "#crc_reset_to_default_submit" ).click(
+        function (e) {
+            var crc_form = $( this ).closest( 'form' );
+            e.preventDefault();
+            $( '#reset_warning_modal' ).modal(
+                'show',
+                {
+					backdrop: 'static',
+					keyboard: false
+                }
+            ).on(
+                'click',
+                '#crc_proceed',
+                function(e) {
+                    var reset_warning_modal = $( '#reset_warning_modal' );
+                    var be_confirm          = confirm( 'Data will be lost forever! Are you sure?' );
+                    if (be_confirm) {
+                        var tempElement = $( "<input type='hidden'/>" );
+                        tempElement
+                            .attr( "name", 'crc_reset_to_default_submit' )
+                            .appendTo( crc_form );
+                        crc_form.submit();
+                        reset_warning_modal.modal( 'hide' );
+                        tempElement.remove();
+                        return true;
+                    }
+                    e.preventDefault();
+                    reset_warning_modal.modal( 'hide' );
+                }
+            );
+            $( "#cancel" ).on(
+                'click',
+                function(e){
+					e.preventDefault();
+					$( '#reset_warning_modal' ).modal( 'hide' );
+				}
+            );
+		}
+    );
     /**
      * Success message
      */
