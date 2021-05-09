@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class CRC {
 
     // Plugin version.
-    const CRC_VERSION = '1.0.0';
+    const CRC_VERSION = '1.1.0';
 
     /**
      * CRC constructor.
