@@ -30,11 +30,51 @@
             }
         }
     );
+    $( "#crc_delete_custom_roles_to_default_submit" ).click(
+        function (e) {
+            var crc_custom_form            = $( this ).closest( 'form' );
+            var reset_custom_warning_modal = $( '#reset_custom_warning_modal' );
+            e.preventDefault();
+            $( reset_custom_warning_modal ).modal(
+                'show',
+                {
+					backdrop: 'static',
+					keyboard: false
+                }
+            ).on(
+                'click',
+                '#crc_custom_proceed',
+                function(e) {
+                    var be_custom_confirm = confirm( 'Data will be lost forever! Are you sure?' );
+                    if (be_custom_confirm) {
+                        var tempElement = $( "<input type='hidden'/>" );
+                        tempElement
+                            .attr( "name", 'crc_delete_custom_roles_to_default_submit' )
+                            .appendTo( crc_custom_form );
+                        crc_custom_form.submit();
+                        reset_custom_warning_modal.modal( 'hide' );
+                        tempElement.remove();
+                    } else {
+                        reset_custom_warning_modal.modal( 'hide' );
+                        e.preventDefault();
+                    }
+                }
+            );
+            $( "#crc_custom_cancel" ).on(
+                'click',
+                function(e){
+                    $( '#reset_custom_warning_modal' ).modal( 'hide' );
+                    e.preventDefault();
+				}
+            );
+		}
+    );
     $( "#crc_reset_to_default_submit" ).click(
         function (e) {
-            var crc_form = $( this ).closest( 'form' );
+            var crc_form            = $( this ).closest( 'form' );
+            var reset_warning_modal = $( '#reset_warning_modal' );
             e.preventDefault();
-            $( '#reset_warning_modal' ).modal(
+            $( reset_warning_modal ).modal(
                 'show',
                 {
 					backdrop: 'static',
@@ -44,8 +84,7 @@
                 'click',
                 '#crc_proceed',
                 function(e) {
-                    var reset_warning_modal = $( '#reset_warning_modal' );
-                    var be_confirm          = confirm( 'Data will be lost forever! Are you sure?' );
+                    var be_confirm = confirm( 'Data will be lost forever! Are you sure?' );
                     if (be_confirm) {
                         var tempElement = $( "<input type='hidden'/>" );
                         tempElement
@@ -54,17 +93,17 @@
                         crc_form.submit();
                         reset_warning_modal.modal( 'hide' );
                         tempElement.remove();
-                        return true;
+                    } else {
+                        reset_warning_modal.modal( 'hide' );
+                        e.preventDefault();
                     }
-                    e.preventDefault();
-                    reset_warning_modal.modal( 'hide' );
                 }
             );
-            $( "#cancel" ).on(
+            $( "#crc_cancel" ).on(
                 'click',
                 function(e){
-					e.preventDefault();
-					$( '#reset_warning_modal' ).modal( 'hide' );
+                    $( '#reset_warning_modal' ).modal( 'hide' );
+                    e.preventDefault();
 				}
             );
 		}
