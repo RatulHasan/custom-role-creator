@@ -17,5 +17,8 @@
             "CRC\\": "includes/"
         },
       "files": []
+    },
+    "require": {
+        "appsero/client": "^1.2"
     }
 }
