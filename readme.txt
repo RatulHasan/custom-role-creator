@@ -1,11 +1,11 @@
 === Custom Role Creator (CRC) ===
 Plugin Name: Custom Role Creator (CRC)
-Version: 1.1.0
+Version: 1.1.1
 Author: Ratul Hasan
 Contributors: ratulhasan
 Tags: user, role, editor, security, access, permission, capability, crc,
 Requires at least: 5.2
-Tested up to: 5.7.1
+Tested up to: 6.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-2.0-or-later
