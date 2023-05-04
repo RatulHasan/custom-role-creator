@@ -119,18 +119,22 @@ custom_role_creator();
  *
  * @return void
  */
-function appsero_init_tracker_custom_role_creator_crc() {
+function appsero_init_tracker_custom_role_creator() {
 
 	if ( ! class_exists( 'Appsero\Client' ) ) {
 		require_once __DIR__ . '/appsero/src/Client.php';
 	}
 
-	$client = new Appsero\Client( '719e1c94-5d6d-4076-87b6-f66b874de9f2', 'Custom Role Creator (CRC)', __FILE__ );
+	$client = new Appsero\Client( '7db35b42-99b4-4e80-9e2b-3d1a82ed5311', 'Custom Role Creator', __FILE__ );
 
 	// Active insights
 	$client->insights()->init();
 
+	// Active automatic updater
+	$client->updater();
+
 }
 
-appsero_init_tracker_custom_role_creator_crc();
+appsero_init_tracker_custom_role_creator();
+
 
