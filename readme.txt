@@ -55,6 +55,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 7. Reset Roles
 
 == Changelog ==
+= 1.1.1 =
+* Tested with the new WordPress version 6.2
+
 = 1.1.0 =
 * Assign capabilities to individual users'.
 * Reset Custom Role Creator Made Roles To Default.
