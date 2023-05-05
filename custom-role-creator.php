@@ -3,7 +3,7 @@
  * Plugin Name:         Custom Role Creator (CRC)
  * Plugin URI:          https://github.com/RatulHasan/custom-role-creator
  * Description:         Custom Role Creator plugin allows you to add or change user roles and capabilities easily.
- * Version:             1.1.0
+ * Version:             1.1.1
  * Requires PHP:        5.6
  * Requires at least:   5.2
  * Author:              Ratul Hasan
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class CRC {
 
     // Plugin version.
-    const CRC_VERSION = '1.1.0';
+    const CRC_VERSION = '1.1.1';
 
     /**
      * CRC constructor.
@@ -125,7 +125,7 @@ function appsero_init_tracker_custom_role_creator() {
 		require_once __DIR__ . '/appsero/src/Client.php';
 	}
 
-	$client = new Appsero\Client( '7db35b42-99b4-4e80-9e2b-3d1a82ed5311', 'Custom Role Creator', __FILE__ );
+	$client = new Appsero\Client( '4631dab9-e4da-408a-b9f0-14074cf976b4', 'Custom Role Creator (CRC)', __FILE__ );
 
 	// Active insights
 	$client->insights()->init();
@@ -136,5 +136,6 @@ function appsero_init_tracker_custom_role_creator() {
 }
 
 appsero_init_tracker_custom_role_creator();
+
 
 
