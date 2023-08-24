@@ -79,13 +79,13 @@ if ( isset( $_GET['deleted'])) {
                         <?php
                         if ( 'administrator' !== $key ) {
                             ?>
-                            <a href="users.php?page=custom-role-creator&object=role&role=<?php echo esc_html( $key ); ?>&action=assign&_wpnonce=<?php echo esc_attr( $nonce ); ?>" class="btn btn-success btn-flat btn-xs edit_button">
+                            <a href="users.php?page=custom-role-creator&object=role&role=<?php echo esc_html( $key ); ?>&action=assign&_crc_wpnonce=<?php echo esc_attr( $nonce ); ?>" class="btn btn-success btn-flat btn-xs edit_button">
                                 <i class="fas fa-cogs"></i> <?php esc_html_e( 'Assign capabilities', 'custom-role-creator' ); ?>
                             </a>
                             <button type="button" class="btn btn-primary btn-flat btn-xs crc_role_edit_button" data-bs-toggle="modal" data-bs-target="#myRoleEdit" data-edit_crc_role_display_name="<?php echo esc_attr( $v_all_role ); ?>" data-edit_crc_role_name="<?php echo esc_attr( $key ); ?>">
                                 <i class="fas fa-pencil-alt"></i> <?php esc_html_e( 'Edit role', 'custom-role-creator' ); ?>
                             </button>
-                            <a onclick="return confirm('<?php esc_html_e( 'Confirm to delete?', 'custom-role-creator' ); ?>')" href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=delete&_wpnonce=<?php echo esc_attr( $delete_nonce ); ?>" class="btn btn-danger btn-flat btn-xs delete_button">
+                            <a onclick="return confirm('<?php esc_html_e( 'Confirm to delete?', 'custom-role-creator' ); ?>')" href="users.php?page=custom-role-creator&role=<?php echo esc_html( $key ); ?>&action=delete&_crc_wpnonce=<?php echo esc_attr( $delete_nonce ); ?>" class="btn btn-danger btn-flat btn-xs delete_button">
                                 <i class="fas fa-trash-alt"></i> <?php esc_html_e( 'Delete role', 'custom-role-creator' ); ?>
                             </a>
                             <?php

@@ -48,7 +48,7 @@ class Menu {
         }
 
         $nonce     = wp_create_nonce( 'crc_assign_user_cap_nonce' );
-        $link      = '<a href="users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '">' . esc_html__( 'Add Capabilities', 'custom-role-creator' ) . '</a>';
+        $link      = '<a href="users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_crc_wpnonce=' . $nonce . '">' . esc_html__( 'Add Capabilities', 'custom-role-creator' ) . '</a>';
         $actions[] = wp_kses(
             $link,
             array(
@@ -96,7 +96,7 @@ class Menu {
         $all_roles_obj  = new \WP_Roles();
         $all_role_names = $all_roles_obj->get_names();
         if ( isset( $_GET['action'] ) && 'assign' === $_GET['action'] && 'role' === $_GET['object'] ) {
-            if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'crc_assign_role_nonce' ) ) {
+            if ( ! wp_verify_nonce( $_GET['_crc_wpnonce'], 'crc_assign_role_nonce' ) ) {
                 wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
             }
             $all_caps     = array();
@@ -127,7 +127,7 @@ class Menu {
             include_once CRC_INCLUDE_PATH . '/templates/assign_roles.php';
 
         } elseif ( isset( $_GET['action'] ) && 'assign' === $_GET['action'] && 'user' === $_GET['object'] ) {
-            if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'crc_assign_user_cap_nonce' ) ) {
+            if ( ! wp_verify_nonce( $_GET['_crc_wpnonce'], 'crc_assign_user_cap_nonce' ) ) {
                 wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
             }
 
