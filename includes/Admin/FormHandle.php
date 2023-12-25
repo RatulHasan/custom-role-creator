@@ -63,7 +63,10 @@ class FormHandle {
      * @return void
      */
     public function cb_crc_role_delete() {
-        if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'crc_delete_role_nonce' ) ) {
+        if( empty( $_GET['_crc_wpnonce'] ) ){
+            return;
+        }
+        if ( ! wp_verify_nonce( $_GET['_crc_wpnonce'], 'crc_delete_role_nonce' ) ) {
             wp_die( esc_html__( 'Are you cheating?', 'custom-role-creator' ) );
         }
         $role        = sanitize_text_field( $_GET['role'] );
@@ -257,19 +260,19 @@ class FormHandle {
                         $user->add_cap( $value );
                     }
 
-                    wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=1' );
+                    wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_crc_wpnonce=' . $nonce . '&saved=1' );
                     exit();
                 } else {
-                    wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=0' );
+                    wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_crc_wpnonce=' . $nonce . '&saved=0' );
                     exit();
                 }
             }
 
-            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=0' );
+            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_crc_wpnonce=' . $nonce . '&saved=0' );
             exit();
         } else {
             $user->remove_all_caps();
-            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_wpnonce=' . $nonce . '&saved=1' );
+            wp_safe_redirect( admin_url() . 'users.php?page=custom-role-creator&object=user&action=assign&user_id=' . $user->ID . '&_crc_wpnonce=' . $nonce . '&saved=1' );
             exit();
         }
     }

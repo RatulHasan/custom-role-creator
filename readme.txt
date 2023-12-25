@@ -5,7 +5,7 @@ Author: Ratul Hasan
 Contributors: ratulhasan
 Tags: user, role, editor, security, access, permission, capability, crc,
 Requires at least: 5.2
-Tested up to: 6.2
+Tested up to: 6.4.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-2.0-or-later
@@ -55,6 +55,10 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 7. Reset Roles
 
 == Changelog ==
+= 1.1.2 =
+* Tested with the new WordPress version 6.4.2
+* 🛠️ [FIX] Nonce verification issue fixed.
+
 = 1.1.1 =
 * Tested with the new WordPress version 6.2
 
