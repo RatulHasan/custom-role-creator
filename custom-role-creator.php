@@ -3,10 +3,10 @@
  * Plugin Name:         Custom Role Creator (CRC)
  * Plugin URI:          https://github.com/RatulHasan/custom-role-creator
  * Description:         Custom Role Creator plugin allows you to add or change user roles and capabilities easily.
- * Version:             1.1.2
+ * Version:             1.1.3
  * Requires PHP:        5.6
  * Requires at least:   5.2
- * Tested up to:        6.4.2
+ * Tested up to:        6.8.1
  * Author:              Ratul Hasan
  * Author URI:          https://ratuljh.wordpress.com/
  * License:             GPL-2.0-or-later
@@ -30,14 +30,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class CRC {
 
     // Plugin version.
-    const CRC_VERSION = '1.1.2';
+    const CRC_VERSION = '1.1.3';
 
     /**
      * CRC constructor.
      */
     public function __construct() {
         require_once __DIR__ . '/vendor/autoload.php';
-        $this->localization_setup();
+        // $this->localization_setup();
         $this->define_constant();
 
         add_action( 'activate_plugin', array( $this, 'cb_activate_plugin' ) );
@@ -74,9 +74,9 @@ class CRC {
      *
      * @return void
      */
-    public function localization_setup() {
-        load_plugin_textdomain( 'custom-role-creator', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-    }
+    // public function localization_setup() {
+        // load_plugin_textdomain( 'custom-role-creator', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+    // }
 
     /**
      * Initiate the plugin
