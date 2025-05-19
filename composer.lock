@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3788387b39a87a692bb4fec680b04ae",
+    "content-hash": "b41de9e7b48edf6113e6e618e178407e",
     "packages": [
         {
             "name": "appsero/client",
-            "version": "v1.2.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Appsero/client.git",
-                "reference": "ddfaa9ce62618e0aee4f95ddeb37a27ebd9a3508"
+                "reference": "12ff65b9770286d21edf314e7acfcd26fdde3315"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Appsero/client/zipball/ddfaa9ce62618e0aee4f95ddeb37a27ebd9a3508",
-                "reference": "ddfaa9ce62618e0aee4f95ddeb37a27ebd9a3508",
+                "url": "https://api.github.com/repos/Appsero/client/zipball/12ff65b9770286d21edf314e7acfcd26fdde3315",
+                "reference": "12ff65b9770286d21edf314e7acfcd26fdde3315",
                 "shasum": ""
             },
             "require": {
@@ -56,18 +56,55 @@
             ],
             "support": {
                 "issues": "https://github.com/Appsero/client/issues",
-                "source": "https://github.com/Appsero/client/tree/v1.2.3"
+                "source": "https://github.com/Appsero/client/tree/v2.0.4"
             },
-            "time": "2023-03-27T14:48:43+00:00"
+            "time": "2024-11-25T05:58:23+00:00"
+        },
+        {
+            "name": "appsero/updater",
+            "version": "v2.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Appsero/updater.git",
+                "reference": "0c899f2e6b5894b695751d738151a98461cdb198"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Appsero/updater/zipball/0c899f2e6b5894b695751d738151a98461cdb198",
+                "reference": "0c899f2e6b5894b695751d738151a98461cdb198",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Appsero\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tareq Hasan",
+                    "email": "tareq@appsero.com"
+                }
+            ],
+            "description": "Appsero client updater module",
+            "support": {
+                "issues": "https://github.com/Appsero/updater/issues",
+                "source": "https://github.com/Appsero/updater/tree/v2.3.3"
+            },
+            "time": "2025-03-10T03:42:43+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

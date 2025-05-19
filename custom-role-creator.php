@@ -37,7 +37,9 @@ class CRC {
      */
     public function __construct() {
         require_once __DIR__ . '/vendor/autoload.php';
-        // $this->localization_setup();
+         add_action('plugins_loaded', function (){
+             $this->localization_setup();
+         });
         $this->define_constant();
 
         add_action( 'activate_plugin', array( $this, 'cb_activate_plugin' ) );
@@ -74,9 +76,9 @@ class CRC {
      *
      * @return void
      */
-    // public function localization_setup() {
-        // load_plugin_textdomain( 'custom-role-creator', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-    // }
+     public function localization_setup() {
+         load_plugin_textdomain( 'custom-role-creator', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+     }
 
     /**
      * Initiate the plugin
@@ -129,14 +131,10 @@ function appsero_init_tracker_custom_role_creator() {
 	$client = new Appsero\Client( '4631dab9-e4da-408a-b9f0-14074cf976b4', 'Custom Role Creator (CRC)', __FILE__ );
 
 	// Active insights
-	$client->insights()->init();
-
-	// Active automatic updater
-	$client->updater();
+    $client->insights()->init();
+    // Use the new updater initialization method
+    Appsero\Updater::init( $client );
 
 }
 
 appsero_init_tracker_custom_role_creator();
-
-
-
