@@ -67,23 +67,32 @@ class Menu {
      * @return void
      */
     public function cb_add_settings_page() {
-        add_options_page(
-            __( 'Custom Role Creator', 'custom-role-creator' ),
-            __( 'Custom Role Creator', 'custom-role-creator' ),
-            'manage_options',
-            'crc-settings',
-            array( $this, 'cb_add_custom_role_creator_settings_page' ),
-            7
-        );
-
-        add_submenu_page(
-            'users.php',
+        add_menu_page(
             __( 'Custom Role Creator', 'custom-role-creator' ),
             __( 'Custom Role Creator', 'custom-role-creator' ),
             'manage_options',
             'custom-role-creator',
             array( $this, 'cb_add_custom_role_creator_page' ),
-            3
+            'dashicons-unlock',
+            70
+        );
+
+        add_submenu_page(
+            'custom-role-creator',
+            __( 'All Roles', 'custom-role-creator' ),
+            __( 'All Roles', 'custom-role-creator' ),
+            'manage_options',
+            'custom-role-creator',
+            array( $this, 'cb_add_custom_role_creator_page' )
+        );
+
+        add_submenu_page(
+            'custom-role-creator',
+            __( 'Settings', 'custom-role-creator' ),
+            __( 'Settings', 'custom-role-creator' ),
+            'manage_options',
+            'crc-settings',
+            array( $this, 'cb_add_custom_role_creator_settings_page' )
         );
     }
 
