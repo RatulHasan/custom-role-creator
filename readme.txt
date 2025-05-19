@@ -1,6 +1,6 @@
 === Custom Role Creator (CRC) ===
 Plugin Name: Custom Role Creator (CRC)
-Version: 1.1.3
+Version: 1.1.4
 Author: Ratul Hasan
 Contributors: ratulhasan
 Tags: user, role, security, permission, capability
@@ -55,6 +55,12 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 7. Reset Roles
 
 == Changelog ==
+= 1.1.4 =
+* 🚀 Brings this plugin into its own menu.
+* 🛠️ Improved compatibility with the latest WordPress core.
+* 🔧 Minor code optimizations and cleanup.
+* 📖 Updated documentation and plugin metadata.
+
 = 1.1.3 =
 * 🚀 Tested with the new WordPress version 6.8.1
 * ❌ Remove text domain to autoload
